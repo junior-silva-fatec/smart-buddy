@@ -9,7 +9,7 @@ function Cadastro() {
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis rem ipsum tempora, distinctio nobis, deserunt odio quia voluptate sequi nam sunt quo earum ab. </p>
         <div className="cadastro-login">
             
-        <Link to="/login">Criar conta</Link>{" "}
+        <Link to="/cadastro">Criar conta</Link>{" "}
         <Link to="/login">Login</Link>{" "}
         </div>
       </main>
