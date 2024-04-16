@@ -7,7 +7,7 @@ function Header() {
 
     return (
         <div id="header">
-            <Link to="/"><h1>Smart Buddy</h1></Link>{" "}
+            <Link to="/"><h2>Smart Buddy</h2></Link>{" "}
             <Link to="/login"><button>login</button></Link>
         </div>
     );
