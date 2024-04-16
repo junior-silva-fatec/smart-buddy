@@ -1,12 +1,8 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import Header from "./components/Header";
-import Event from "./components/Event";
 import Home from "./pages/Home"
 import Login from "./pages/Login"
+import Cadastro from "./pages/Cadastro"
 import "./App.css";
-
-const dados = ["João", "Maria", "José"];
-const horas = ["10:30", "14:00", "15:30"]
 
 function App() {  
   return (
@@ -14,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login />} /> 
+        <Route path="/cadastro" element={<Cadastro />} /> 
       </Routes>
     </BrowserRouter>
     

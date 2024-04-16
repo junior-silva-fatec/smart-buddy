@@ -1,13 +1,16 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { Link } from "react-router-dom";
+
 function Header() {
-  
+
+    const handleLoginClick = () => {
+    };
+
     return (
-      <div id="header">
-        <h1>Smart Buddy</h1>
-        <button>login</button>
-      </div>
+        <div id="header">
+            <Link to="/"><h1>Smart Buddy</h1></Link>{" "}
+            <Link to="/login"><button>login</button></Link>
+        </div>
     );
-  }
-  
-  export default Header;
-  
+}
+
+export default Header;
