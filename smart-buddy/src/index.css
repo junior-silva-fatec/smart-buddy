@@ -62,7 +62,8 @@ button:focus-visible {
   align-items: center;
   justify-content: space-around;
   margin: auto;
-  width: 70%;
+  width: 70%;  
+  
 }
 .main_home > p {
   width: 80%;
@@ -90,6 +91,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 70%;
   justify-content: space-around;
   margin: 5%
 }
@@ -107,6 +109,21 @@ button:focus-visible {
   width: 100;
   display: flex;
   justify-content: space-around;
+}
+
+.main_cadastro{
+  text-align: center;
+  background-color: #f9f9f9;
+  border: black solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  margin-top: 12%;
+  margin-bottom: 12%;
+  width: 600px;
 }
 /*
 :root {
@@ -201,4 +218,3 @@ button:focus-visible {
   }
 }
 */
-
