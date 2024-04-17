@@ -10,7 +10,7 @@ function Login() {
         <div className="cadastro-login">
             
         <Link to="/cadastro">Criar conta</Link>{" "}
-        <Link to="/login">Login</Link>{" "}
+        <Link to="/eventos">Login</Link>{" "}
         </div>
       </main>
         </div>
