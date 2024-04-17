@@ -27,8 +27,8 @@ function Login() {
                 </div>
               </div>
               <div className="espaco"></div>
-              <div>
-                <button type="submit">Login</button>
+              <div>                
+                <Link to="/eventos"><button type="submit">Login</button></Link>
               </div>
             </form>
           </div>
