@@ -1,19 +1,45 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+
 function Login() {
-    return (
-        <div>
+  return (
+    <div>
       <Header />
       <main className="main_home">
         <h1>Login</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis rem ipsum tempora, distinctio nobis, deserunt odio quia voluptate sequi nam sunt quo earum ab. </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
+          rem ipsum tempora, distinctio nobis, deserunt odio quia voluptate
+          sequi nam sunt quo earum ab.
+        </p>
         <div className="cadastro-login">
-            
-        <Link to="/cadastro">Criar conta</Link>{" "}
-        <Link to="/eventos">Login</Link>{" "}
+          <div className="rodape-form-login">
+            <form className="form-login">
+              <div className="email-senha-inputs">
+                {" "}
+                <div>
+                  <label htmlFor="email">E-mail:</label>
+                  <input type="email" id="email" name="email" />
+                </div>
+                <div>
+                  <label htmlFor="password">Senha:</label>
+                  <input type="password" id="password" name="password" />
+                </div>
+              </div>
+              <div className="espaco"></div>
+              <div>
+                <button type="submit">Login</button>
+              </div>
+            </form>
+          </div>
+          <div className="criar-conta-cancelar">
+            <Link to="/cadastro">Criar conta</Link>{" "}
+            <Link to="/">Cancelar</Link>{" "}
+          </div>
         </div>
       </main>
-        </div>
-    )
+    </div>
+  );
 }
-export default Login
+
+export default Login;

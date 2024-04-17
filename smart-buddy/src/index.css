@@ -88,11 +88,26 @@ button:focus-visible {
 
 .cadastro-login {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-around;
   margin: 5%
 }
-
+.form-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.espaco {
+  width: 2%;
+}
+.criar-conta-cancelar {
+  margin-top: 3%;
+  width: 100;
+  display: flex;
+  justify-content: space-around;
+}
 /*
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
