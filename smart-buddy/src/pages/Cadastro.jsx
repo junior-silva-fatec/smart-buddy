@@ -23,7 +23,7 @@ function Cadastro() {
               </div>
               <div className="espaco"></div>
               <div>
-                <button type="submit">Criar conta</button>
+              <Link to="/eventos"><button type="submit">Criar conta</button></Link>                
               </div>
             </form>
           </div>
