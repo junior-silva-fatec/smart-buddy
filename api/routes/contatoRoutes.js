@@ -72,4 +72,17 @@ router.delete("/:id", getContato, async (req, res) => {
   }
 });
 
+async function getContato(req, res, next) {
+  try {
+    const contato = await Contato.findById(req.params.id)
+    if (contato == null) {
+      return res.status(404).json({message: 'Contato não encontrado'})
+    }
+    res.contato = contato;
+    next()
+  } catch (err) {
+    return res.status(500).json({message: err.message})
+  }
+}
+
 module.exports = router;
