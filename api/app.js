@@ -9,8 +9,12 @@ app.use(express.json());
 
 const contatoRouter = require("./routes/contatoRoutes");
 app.use("/contatos", contatoRouter);
+const userRouter = require("./routes/userRoutes");
+app.use("/users", userRouter);
+const eventRouter = require("./routes/eventRoutes");
+app.use("/events", eventRouter);
 
-mongoose.connect(process.env.MONGODE_URI, {
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
