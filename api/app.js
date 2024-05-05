@@ -1,8 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
@@ -16,7 +15,7 @@ app.use("/events", eventRouter);
 const loginRouter = require("./routes/loginRoutes");
 app.use("/login", loginRouter);
 
-mongoose.connect("mongodb+srv://araujosilva:OUFbKtBwqFQo1R5h@clusteraulaintegracao.hlirbyy.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAulaIntegracao ", {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
