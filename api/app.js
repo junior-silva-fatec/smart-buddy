@@ -13,8 +13,10 @@ const userRouter = require("./routes/userRoutes");
 app.use("/users", userRouter);
 const eventRouter = require("./routes/eventRoutes");
 app.use("/events", eventRouter);
+const loginRouter = require("./routes/loginRoutes");
+app.use("/login", loginRouter);
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect("mongodb+srv://araujosilva:OUFbKtBwqFQo1R5h@clusteraulaintegracao.hlirbyy.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAulaIntegracao ", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
