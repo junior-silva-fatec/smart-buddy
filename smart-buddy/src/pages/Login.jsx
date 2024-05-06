@@ -1,7 +1,31 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import axios from "axios";
+import React, { useState } from 'react';
+
+import 'dotenv/config'
 
 function Login() {
+
+function handleSubmit () {
+  alert('oi')
+}
+
+const [showMessage, setShowMessage] = useState(false);
+const urlBase = process.env.URL_BASE_API
+
+const handleClick =  async () => {
+  setShowMessage(true);
+//TODO ARRUMAR ESSAS VARIÁVEIS
+  //await axios.post('http://localhost:3000/contatos', {
+    await axios.post(`${urlBase}/contatos`, {
+    nome: "Teste url env",
+    email: "oi@email.com",
+    telefone: "111231342",
+    foto: "#"
+  }) 
+}
+
   return (
     <div>
       <Header />
@@ -14,7 +38,7 @@ function Login() {
         </p>
         <div className="cadastro-login">
           <div className="rodape-form-login">
-            <form className="form-login">
+            <form className="form-login" onSubmit={handleClick}>
               <div className="email-senha-inputs">
                 {" "}
                 <div>
@@ -28,7 +52,7 @@ function Login() {
               </div>
               <div className="espaco"></div>
               <div>                
-                <Link to="/eventos"><button type="submit">Login</button></Link>
+                <button type="submit">Login</button>
               </div>
             </form>
           </div>
