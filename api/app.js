@@ -1,10 +1,21 @@
 const express = require("express");
+const cors = require('cors')
 const mongoose = require("mongoose");
 
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+
+
+if(process.env.ALLOW_CORS){
+  const corsOptions = {
+    origin: process.env.URL_REACT_LOCAL, // Substitua pelo domínio do seu aplicativo React
+    optionsSuccessStatus: 200 // Algumas versões do CORS exigem isso
+  };
+  
+  app.use(cors(corsOptions));
+}
 
 const contatoRouter = require("./routes/contatoRoutes");
 app.use("/contatos", contatoRouter);
