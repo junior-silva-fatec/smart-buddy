@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import 'dotenv/config'
 
 function Login() {
-
+/*
 function handleSubmit () {
   alert('oi')
 }
@@ -64,6 +64,13 @@ const handleClick =  async () => {
       </main>
     </div>
   );
+  */
+
+  return (
+    <>
+    <p>login</p>
+    </>
+  )
 }
 
 export default Login;

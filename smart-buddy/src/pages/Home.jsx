@@ -10,7 +10,7 @@ function Home() {
         <div className="cadastro-login">
             
         <Link to="/cadastro">Criar conta</Link>{" "}
-        <Link to="/login">Login</Link>{" "}
+        {/* <Link to="/login">Login</Link>{" "} */}
         </div>
       </main>
     </div>
