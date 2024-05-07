@@ -1,19 +1,24 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+
 function Home() {
   return (
-    <div>
+    <div className="container">
       <Header />
-      <main className="main_home">
-        <h1>Smart Buddy</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis rem ipsum tempora, distinctio nobis, deserunt odio quia voluptate sequi nam sunt quo earum ab. </p>
-        <div className="cadastro-login">
-            
-        <Link to="/cadastro">Criar conta</Link>{" "}
-        {/* <Link to="/login">Login</Link>{" "} */}
+      <main className="main">
+        <h1>Welcome to Smart Buddy</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          nec feugiat velit. Nullam gravida tortor magna, eget tincidunt purus
+          tempor eget.
+        </p>
+        <div className="button-group">
+          <Link to="/cadastro" className="button">Criar Conta</Link>
+          <Link to="/login" className="button">Login</Link>
         </div>
       </main>
     </div>
   );
 }
+
 export default Home;
