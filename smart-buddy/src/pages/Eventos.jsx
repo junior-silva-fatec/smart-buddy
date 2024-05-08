@@ -11,7 +11,9 @@ function Eventos() {
     // Função para obter os eventos do endpoint
     const fetchEvents = async () => {
       try {
-        const response = await fetch("https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com/events");
+        const response = await fetch(
+          "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com/events"
+        );
         if (response.ok) {
           const data = await response.json();
           setEvents(data);
@@ -31,12 +33,7 @@ function Eventos() {
       <Header />
       <main className="main_eventos">
         <button>+</button>
-        <h1>Eventos</h1>
-
-        <div className="cadastro-login">
-          <Link to="/cadastro">Criar conta</Link>{" "}
-          <Link to="/login">Login</Link>{" "}
-        </div>
+        
 
         {/* Renderiza os eventos */}
         <div className="events-list">
@@ -51,14 +48,40 @@ function Eventos() {
 
 // Componente Event para exibir um evento individual
 const Event = ({ event }) => {
+  const diaDoMes = Number(event.date.substring(8, 10));
+  const nomesMes = [
+    "JAN",
+    "FEV",
+    "MAR",
+    "ABR",
+    "MAI",
+    "JUN",
+    "JUL",
+    "AGO",
+    "SET",
+    "OUT",
+    "NOV",
+    "DEZ",
+  ];
+  const mes = nomesMes[Number(event.date.substring(5, 7)) - 1];
   return (
     <div className="event">
-      <h2>{event.title}</h2>
-      <p>{event.description}</p>
+      <div className="colDatasEvento">
+        <p className="diaDoMes">{diaDoMes}</p>
+        <p className="nomeMes">{mes}</p>
+      </div>
+      <div className="colHorario">
+        <p>{event.time}</p>
+        <p>{event.duration} hours</p>
+
+      </div>
+      <div className="colDescricaoEvento">
+        <h2>{event.title}</h2>
+        <p>{event.description}</p>
+      </div>
+      {/* <p>{event.description}</p>
       <p>Date: {event.date}</p>
-      <p>Time: {event.time}</p>
-      <p>Duration: {event.duration} hours</p>
-      <p>Owner: {event.owner}</p>
+      <p>Owner: {event.owner}</p> */}
     </div>
   );
 };
