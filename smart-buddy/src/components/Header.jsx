@@ -34,8 +34,7 @@ function Header() {
         window.location.href = "/eventos";
       } else {
         // Exibir mensagem de erro se a resposta não for 200
-        const data = await response.json();
-        window.location.href = "/eventos";
+        const data = await response.json();        
         setErrorMessage(data.message || "Ocorreu um erro durante o login.");
       }
     } catch (error) {
@@ -77,7 +76,3 @@ function Header() {
 }
 
 export default Header;
-
-
-
-"https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com/login"
