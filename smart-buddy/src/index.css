@@ -2,7 +2,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -25,6 +24,7 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f9f9f9;
 }
 
 h1 {
@@ -52,39 +52,22 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-.main_home {
-  text-align: center;
-  background-color: #f9f9f9;
-  border: black solid;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  margin: auto;
-  width: 70%;
-}
-.main_home > p {
-  width: 80%;
-}
 
-.main_eventos {
+.main_home,
+.main_eventos,
+.main_cadastro {
   text-align: center;
   background-color: #f9f9f9;
-  border: black solid;
+  border: 1px solid #000;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: auto;
-  margin-top: 12%;
-  margin-bottom: 12%;
-  width: 80vw;
-  max-width: 800px;
-}
-.main_eventos > p {
+  margin: 2% auto;
   width: 90%;
+  max-width: 800px;
+  padding: 20px;
 }
 
 .cadastro-login {
@@ -95,35 +78,23 @@ button:focus-visible {
   justify-content: space-around;
   margin: 5%;
 }
+
 .form-login {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80%;
 }
+
 .espaco {
   width: 2%;
 }
 .criar-conta-cancelar {
   margin-top: 3%;
-  width: 100;
+  width: 100%;
   display: flex;
   justify-content: space-around;
-}
-
-.main_cadastro {
-  text-align: center;
-  background-color: #f9f9f9;
-  border: black solid;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  margin: auto;
-  margin-top: 12%;
-  margin-bottom: 12%;
-  width: 600px;
 }
 
 .container {
@@ -168,6 +139,8 @@ button:focus-visible {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo-container {
@@ -211,7 +184,7 @@ button:focus-visible {
 .form-login {
   text-align: center;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
   margin: auto;
 }
 
@@ -323,54 +296,140 @@ button[type="submit"]:hover {
 }
 
 .events-list {
-  width: 80%;
+  width: 100%;
 }
 
 .event {
   display: flex;
+  justify-content: space-between;
   width: 100%;
-  margin: 2%;
-  border: solid red 2px;
+  margin: 0.5vw;
+  padding: 10px;
+  border: 2px solid red;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.event > p {
+.event > p,
+h2 {
   margin: 0;
   padding: 0;
 }
 
 .diaDoMes {
   background: #0056b3;
-  border-radius: 100%;
+  border-radius: 50%;
   color: #f9f9f9;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .nomeMes {
   font-weight: bold;
+  margin-top: 0.5rem;
 }
 
 .colDatasEvento,
 .colHorario,
-.colDescricaoEvento {
-  margin: 2%;
+.colDescricaoEvento,
+.colBotoes {
+  margin: 0.3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.colDatasEvento {
+  width: 3rem;
+}
+
+.colHorario {
+  width: 5rem;
 }
 
 .colDescricaoEvento {
   text-align: left;
+  flex: 1;
+  margin-left: 10px;
+}
+
+.colBotoes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.botaoDelete,
+.botaoEdit {
+  margin: 2px;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .botaoDelete {
   background-color: red;
-  margin: 2px;
 }
 
 .botaoEdit {
   background-color: blue;
-  margin: 2px;
+}
+
+.botaoDelete:hover {
+  background-color: #aa0000;
 }
 
 .botaoEdit:hover {
   background-color: #0000aa;
 }
 
-.botaoDelete:hover {
-  background-color: #aa0000;
+/* Responsiveness */
+@media (max-width: 768px) {
+  .main_eventos,
+  .main_home,
+  .main_cadastro {
+    width: 90%;
+    margin: 5% auto;
+  }
+
+  .event {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .colDatasEvento,
+  .colHorario,
+  .colDescricaoEvento,
+  .colBotoes {
+    align-items: flex-start;
+    margin: 0.5rem 0;
+  }
+
+  .colBotoes {
+    flex-direction: row;
+  }
+
+  .button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

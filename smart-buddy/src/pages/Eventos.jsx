@@ -143,6 +143,8 @@ const Event = ({ event, onDelete, onEdit }) => {
       <div className="colDescricaoEvento">
         <h2>{event.title}</h2>
         <p>{event.description}</p>
+      </div>
+      <div className="colBotoes">
         <button className="botaoDelete" onClick={onDelete}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
