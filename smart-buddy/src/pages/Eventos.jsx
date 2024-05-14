@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
-//require("dotenv/config");
+import { faTrash, faPencil, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function Eventos() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const urlEventos = "http://localhost:80/events";
   //const urlEventos = "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com/events"
@@ -20,7 +20,7 @@ function Eventos() {
         const response = await fetch(urlEventos);
         if (response.ok) {
           const data = await response.json();
-          setEvents(data);
+          setEvents(sortEventsByDate(data));
         } else {
           console.error("Failed to fetch events:", response.statusText);
         }
@@ -32,13 +32,19 @@ function Eventos() {
     fetchEvents();
   }, []);
 
+  const sortEventsByDate = (events) => {
+    return events.sort((a, b) => new Date(a.date) - new Date(b.date));
+  };
+
   const handleDeleteEvent = async (eventId) => {
     try {
       const response = await fetch(`${urlEventos}/${eventId}`, {
         method: "DELETE",
       });
       if (response.ok) {
-        setEvents(events.filter((event) => event._id !== eventId));
+        setEvents(
+          sortEventsByDate(events.filter((event) => event._id !== eventId))
+        );
         console.log("Event deleted successfully");
       } else {
         console.error("Failed to delete event:", response.statusText);
@@ -59,14 +65,38 @@ function Eventos() {
       });
       if (response.ok) {
         setEvents(
-          events.map((event) =>
-            event._id === updatedEvent._id ? updatedEvent : event
+          sortEventsByDate(
+            events.map((event) =>
+              event._id === updatedEvent._id ? updatedEvent : event
+            )
           )
         );
         setIsEditModalOpen(false);
         console.log("Event updated successfully");
       } else {
         console.error("Failed to update event:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleCreateEvent = async (newEvent) => {
+    try {
+      const response = await fetch(urlEventos, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newEvent),
+      });
+      if (response.ok) {
+        const createdEvent = await response.json();
+        setEvents(sortEventsByDate([...events, createdEvent]));
+        setIsCreateModalOpen(false);
+        console.log("Event created successfully");
+      } else {
+        console.error("Failed to create event:", response.statusText);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -83,18 +113,43 @@ function Eventos() {
     setSelectedEvent(null);
   };
 
+  const openCreateModal = () => {
+    setIsCreateModalOpen(true);
+  };
+
+  const closeCreateModal = () => {
+    setIsCreateModalOpen(false);
+  };
+
+  const openDeleteModal = (event) => {
+    setSelectedEvent(event);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedEvent(null);
+  };
+
+  const confirmDelete = () => {
+    handleDeleteEvent(selectedEvent._id);
+    closeDeleteModal();
+  };
+
   return (
     <div>
       <Header />
       <main className="main_eventos">
-        <button>+</button>
+        <button className="button" onClick={openCreateModal}>
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
 
         <div className="events-list">
           {events.map((event) => (
             <Event
               key={event._id}
               event={event}
-              onDelete={() => handleDeleteEvent(event._id)}
+              onDelete={() => openDeleteModal(event)}
               onEdit={() => openEditModal(event)}
             />
           ))}
@@ -105,6 +160,21 @@ function Eventos() {
             event={selectedEvent}
             onClose={closeEditModal}
             onSave={handleEditEvent}
+          />
+        )}
+
+        {isCreateModalOpen && (
+          <CreateEventModal
+            onClose={closeCreateModal}
+            onSave={handleCreateEvent}
+          />
+        )}
+
+        {isDeleteModalOpen && (
+          <DeleteEventModal
+            event={selectedEvent}
+            onClose={closeDeleteModal}
+            onConfirm={confirmDelete}
           />
         )}
       </main>
@@ -224,6 +294,98 @@ const EditEventModal = ({ event, onClose, onSave }) => {
             Cancel
           </button>
         </form>
+      </div>
+    </div>
+  );
+};
+
+const CreateEventModal = ({ onClose, onSave }) => {
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    date: "",
+    time: "",
+    duration: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <h2>Create Event</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Title:
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Description:
+            <input
+              type="text"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Date:
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Time:
+            <input
+              type="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Duration (hours):
+            <input
+              type="number"
+              name="duration"
+              value={formData.duration}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit">Create</button>
+          <button type="button" onClick={onClose}>
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const DeleteEventModal = ({ event, onClose, onConfirm }) => {
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <h2>Confirm Delete</h2>
+        <p>Deseja apagar o evento "{event.title}"?</p>
+        <button onClick={onConfirm}>Sim, apagar</button>
+        <button onClick={onClose}>Cancel</button>
       </div>
     </div>
   );
