@@ -62,8 +62,7 @@ button:focus-visible {
   align-items: center;
   justify-content: space-around;
   margin: auto;
-  width: 70%;  
-  
+  width: 70%;
 }
 .main_home > p {
   width: 80%;
@@ -94,7 +93,7 @@ button:focus-visible {
   width: 100%;
   min-width: 70%;
   justify-content: space-around;
-  margin: 5%
+  margin: 5%;
 }
 .form-login {
   display: flex;
@@ -112,7 +111,7 @@ button:focus-visible {
   justify-content: space-around;
 }
 
-.main_cadastro{
+.main_cadastro {
   text-align: center;
   background-color: #f9f9f9;
   border: black solid;
@@ -328,7 +327,7 @@ button[type="submit"]:hover {
 }
 
 .event {
-  display: flex; 
+  display: flex;
   width: 100%;
   margin: 2%;
   border: solid red 2px;
@@ -348,10 +347,30 @@ button[type="submit"]:hover {
   font-weight: bold;
 }
 
-.colDatasEvento, .colHorario, .colDescricaoEvento {
+.colDatasEvento,
+.colHorario,
+.colDescricaoEvento {
   margin: 2%;
 }
 
 .colDescricaoEvento {
-  text-align: left;  
+  text-align: left;
+}
+
+.botaoDelete {
+  background-color: red;
+  margin: 2px;
+}
+
+.botaoEdit {
+  background-color: blue;
+  margin: 2px;
+}
+
+.botaoEdit:hover {
+  background-color: #0000aa;
+}
+
+.botaoDelete:hover {
+  background-color: #aa0000;
 }
