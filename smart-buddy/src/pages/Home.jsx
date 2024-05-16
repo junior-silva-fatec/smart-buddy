@@ -9,8 +9,6 @@ Modal.setAppElement("#root"); // Defina o elemento raiz para acessibilidade
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
   });
@@ -38,8 +36,6 @@ function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
           email: formData.email,
           password: hashedPassword,
         }),
@@ -84,26 +80,6 @@ function Home() {
       >
         <h2>Criar Conta</h2>
         <form onSubmit={handleSubmit}>
-          <label>
-            First Name:
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Last Name:
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </label>
           <label>
             Email:
             <input
