@@ -82,8 +82,11 @@ function Eventos() {
   };
 
   const handleCreateEvent = async (newEvent) => {
+    const email = localStorage.getItem("userEmail");
+    newEvent.owner = email;
+
     try {
-      const response = await fetch(urlEventos, {
+      const response = await fetch("http://localhost:80/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
