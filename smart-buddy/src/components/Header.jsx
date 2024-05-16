@@ -21,20 +21,25 @@ function Header() {
     const password = event.target.password.value;
 
     try {
-      const response = await fetch("https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
-      });
+      const response = await fetch(
+        "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
+        // Armazena o email do usuário no localStorage
+        localStorage.setItem("userEmail", email);
         // Redirecionar para a página de eventos
         window.location.href = "/eventos";
       } else {
         // Exibir mensagem de erro se a resposta não for 200
-        const data = await response.json();        
+        const data = await response.json();
         setErrorMessage(data.message || "Ocorreu um erro durante o login.");
       }
     } catch (error) {
@@ -45,7 +50,7 @@ function Header() {
 
   return (
     <div id="header">
-            <Link to="/">
+      <Link to="/">
         <h2>Smart Buddy</h2>
       </Link>{" "}
       <button onClick={handleLoginClick}>Login</button>

@@ -11,8 +11,8 @@ function Eventos() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const urlEventos = "http://localhost:80/events";
-  //const urlEventos = "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com/events"
+  const email = localStorage.getItem("userEmail");
+  const urlEventos = `http://localhost:80/events/owner/${email}`;
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -30,7 +30,7 @@ function Eventos() {
     };
 
     fetchEvents();
-  }, []);
+  }, [email, urlEventos]);
 
   const sortEventsByDate = (events) => {
     return events.sort((a, b) => new Date(a.date) - new Date(b.date));
