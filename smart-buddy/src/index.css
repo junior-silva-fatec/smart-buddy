@@ -56,11 +56,24 @@ button:focus-visible {
 }
 
 .main_home,
-.main_eventos,
 .main_cadastro {
   text-align: center;
   background-color: #f9f9f9;
   border: 1px solid #000;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 2% auto;
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.main_eventos {
+  text-align: center;
+  background-color: #f9f9f9;
   border-radius: 10px;
   display: flex;
   flex-direction: column;

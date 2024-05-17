@@ -243,60 +243,62 @@ const EditEventModal = ({ event, onClose, onSave }) => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>Edit Event</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Title:
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Description:
-            <input
-              type="text"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Date:
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Time:
-            <input
-              type="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Duration (hours):
-            <input
-              type="number"
-              name="duration"
-              value={formData.duration}
-              onChange={handleChange}
-            />
-          </label>
-          <button type="submit">Save</button>
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
-        </form>
+    <div className="modal-overlay">
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <h2>Edit Event</h2>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Title:
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Description:
+              <input
+                type="text"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Date:
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Time:
+              <input
+                type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Duration (hours):
+              <input
+                type="number"
+                name="duration"
+                value={formData.duration}
+                onChange={handleChange}
+              />
+            </label>
+            <button type="submit">Save</button>
+            <button type="button" onClick={onClose}>
+              Cancel
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
@@ -322,7 +324,7 @@ const CreateEventModal = ({ onClose, onSave }) => {
   };
 
   return (
-    <div className="modal">
+    <div className="modal-overlay">
       <div className="modal-content">
         <h2>Create Event</h2>
         <form onSubmit={handleSubmit}>
