@@ -55,7 +55,7 @@ function Header() {
       </Link>{" "}
       <button onClick={handleLoginClick}>Login</button>
       {showModal && (
-        <div className="modal">
+        <div className="modalLogin">
           <div className="modal-content">
             <span className="close" onClick={handleCloseModal}>
               &times;
