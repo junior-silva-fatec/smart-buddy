@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [userEmail, setUserEmail] = useState(null);
+
+  useEffect(() => {
+    // Verificar se há um email do usuário armazenado no localStorage
+    const email = localStorage.getItem("userEmail");
+    if (email) {
+      setUserEmail(email);
+    }
+  }, []);
 
   const handleLoginClick = () => {
     setShowModal(true);
@@ -12,6 +21,14 @@ function Header() {
   const handleCloseModal = () => {
     setShowModal(false);
     setErrorMessage(""); // Limpar mensagem de erro ao fechar o modal
+  };
+
+  const handleLogout = () => {
+    // Remover o email do usuário do localStorage e atualizar o estado
+    localStorage.removeItem("userEmail");
+    setUserEmail(null);
+    // Redirecionar para a página inicial
+    window.location.href = "/";
   };
 
   const handleLogin = async (event) => {
@@ -35,6 +52,9 @@ function Header() {
       if (response.ok) {
         // Armazena o email do usuário no localStorage
         localStorage.setItem("userEmail", email);
+        setUserEmail(email);
+        // Fechar o modal
+        handleCloseModal();
         // Redirecionar para a página de eventos
         window.location.href = "/eventos";
       } else {
@@ -53,7 +73,11 @@ function Header() {
       <Link to="/">
         <h2>Smart Buddy</h2>
       </Link>{" "}
-      <button onClick={handleLoginClick}>Login</button>
+      {!userEmail ? (
+        <button onClick={handleLoginClick}>Login</button>
+      ) : (
+        <button onClick={handleLogout}>Logout</button>
+      )}
       {showModal && (
         <div className="modal-overlay">
           <div className="modalLogin">
