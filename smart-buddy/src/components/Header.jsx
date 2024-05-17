@@ -55,24 +55,26 @@ function Header() {
       </Link>{" "}
       <button onClick={handleLoginClick}>Login</button>
       {showModal && (
-        <div className="modalLogin">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-              <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" />
-              </div>
-              {errorMessage && <p className="error">{errorMessage}</p>}
-              <button type="submit">Login</button>
-            </form>
+        <div className="modal-overlay">
+          <div className="modalLogin">
+            <div className="modal-content">
+              <span className="close" onClick={handleCloseModal}>
+                &times;
+              </span>
+              <h2>Login</h2>
+              <form onSubmit={handleLogin}>
+                <div className="form-group">
+                  <label htmlFor="email">Email:</label>
+                  <input type="email" id="email" name="email" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password:</label>
+                  <input type="password" id="password" name="password" />
+                </div>
+                {errorMessage && <p className="error">{errorMessage}</p>}
+                <button type="submit">Login</button>
+              </form>
+            </div>
           </div>
         </div>
       )}
