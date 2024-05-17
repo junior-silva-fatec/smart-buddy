@@ -68,10 +68,7 @@ function Home() {
         <div className="button-group">
           <button onClick={openModal} className="button">
             Criar Conta
-          </button>
-          <Link to="/login" className="button">
-            Login
-          </Link>
+          </button>          
         </div>
       </main>
 
