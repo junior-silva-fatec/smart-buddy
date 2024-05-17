@@ -385,7 +385,7 @@ const CreateEventModal = ({ onClose, onSave }) => {
 
 const DeleteEventModal = ({ event, onClose, onConfirm }) => {
   return (
-    <div className="modal">
+    <div className="modal-overlay">
       <div className="modal-content">
         <h2>Confirm Delete</h2>
         <p>Deseja apagar o evento "{event.title}"?</p>
