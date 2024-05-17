@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import bcrypt from "bcryptjs"; // Para hash da senha
-import Modal from "react-modal"; // Biblioteca para criar modais
+import bcrypt from "bcryptjs"; // For password hashing
+import Modal from "react-modal"; // Library for creating modals
 
-Modal.setAppElement("#root"); // Defina o elemento raiz para acessibilidade
+Modal.setAppElement("#root"); // Set the root element for accessibility
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -29,25 +31,27 @@ function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const hashedPassword = await bcrypt.hash(formData.password, 10); // Hash da senha
+      const hashedPassword = await bcrypt.hash(formData.password, 10); // Hash the password
       const response = await fetch("http://localhost:80/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
           email: formData.email,
           password: hashedPassword,
         }),
       });
       if (response.ok) {
-        console.log("Usuário criado com sucesso");
+        console.log("User created successfully");
         closeModal();
       } else {
-        console.error("Erro ao criar usuário");
+        console.error("Error creating user");
       }
     } catch (error) {
-      console.error("Erro:", error);
+      console.error("Error:", error);
     }
   };
 
@@ -77,6 +81,26 @@ function Home() {
       >
         <h2>Criar Conta</h2>
         <form onSubmit={handleSubmit}>
+          <label>
+            First Name:
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </label>
           <label>
             Email:
             <input
