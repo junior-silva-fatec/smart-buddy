@@ -210,11 +210,15 @@ button:focus-visible {
 label {
   display: block;
   margin-bottom: 5px;
+  text-align: left;
 }
 
 input[type="email"],
-input[type="password"] {
-  width: 100%;
+input[type="password"],
+input[type="date"],
+input[type="time"],
+input[type="number"] {
+  width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
