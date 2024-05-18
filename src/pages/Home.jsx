@@ -14,7 +14,9 @@ function Home() {
     email: "",
     password: "",
   });
-
+  //const urlAPI = process.env.REACT_APP_API_URL;
+  const urlAPI =
+    "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com";
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -32,7 +34,7 @@ function Home() {
     e.preventDefault();
     try {
       const hashedPassword = await bcrypt.hash(formData.password, 10); // Hash the password
-      const response = await fetch("http://localhost:80/users", {
+      const response = await fetch(`${urlAPI}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +70,7 @@ function Home() {
         <div className="button-group">
           <button onClick={openModal} className="button">
             Criar Conta
-          </button>          
+          </button>
         </div>
       </main>
 
