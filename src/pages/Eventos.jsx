@@ -12,7 +12,8 @@ function Eventos() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const email = localStorage.getItem("userEmail");
-  const urlAPI = process.env.REACT_APP_API_URL;
+  //const urlAPI = process.env.REACT_APP_API_URL;
+  const urlAPI = "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com"
   const urlEventos = `${urlAPI}/events/owner/${email}`;
 
   useEffect(() => {
