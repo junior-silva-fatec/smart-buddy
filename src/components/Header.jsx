@@ -5,7 +5,8 @@ function Header() {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [userEmail, setUserEmail] = useState(null);
-  const urlAPI = process.env.REACT_APP_API_URL;
+  //const urlAPI = process.env.REACT_APP_API_URL;
+  const urlAPI = "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com"
 
   useEffect(() => {
     // Verificar se há um email do usuário armazenado no localStorage
