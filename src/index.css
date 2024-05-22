@@ -91,12 +91,10 @@ button:focus-visible {
   align-content: space-around;
   flex-wrap: wrap;
   justify-content: flex-end;
-  max-width: 1000px;  
-  width: 70%;
+  max-width: 100%;  
+  width: 100%;
   flex-direction: row-reverse;
-  margin-top: 20px;
-  margin: auto;
-  max-height: 10%;
+  margin-top: 30px;    
   width: 1000px;
   top: 40px;
   left: calc(50% - 500px);
@@ -345,10 +343,11 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 0.5vw;
+  margin-top: 0;
+  margin: 0  0.5vw 0.5vw;
   padding: 10px;
   border: 2px solid red;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: #fff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -441,6 +440,28 @@ h2 {
   background-color: #0000aa;
 }
 
+.react-calendar__month-view  {
+  background-color: lightskyblue;  
+}
+.react-calendar__navigation__label{  
+  color: black
+}
+.react-calendar__navigation__arrow {
+  color: orange;
+  background-color: orangered;
+}
+
+.react-calendar__navigation > button[type="button"] {
+  color: rgb(255, 255, 255);
+  background-color: rgb(28, 158, 234);
+  margin: 2px
+}
+/*
+button[type="button"]{
+  background-color: lightblue;  
+}
+*/
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .main_eventos,
@@ -476,7 +497,9 @@ h2 {
     align-items: stretch;
   }
 }
-
+.button.react-calendar__tile {
+  background-color:red
+}
 /* Adicione este CSS ao seu arquivo de estilos */
 
 .modal-overlay {
