@@ -9,7 +9,19 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+#header {
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  height: 50px;
+  max-height: 10%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -72,14 +84,23 @@ button:focus-visible {
 }
 
 .main_eventos {
+  position: fixed;
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
   padding: 20px;
-  align-content: center;
+  align-content: space-around;
   flex-wrap: wrap;
   justify-content: flex-end;
-
+  max-width: 1000px;  
+  width: 70%;
+  flex-direction: row-reverse;
+  margin-top: 20px;
+  margin: auto;
+  max-height: 10%;
+  width: 1000px;
+  top: 40px;
+  left: calc(50% - 500px);
+  z-index: 1000;
 }
 
 .cadastro-login {
