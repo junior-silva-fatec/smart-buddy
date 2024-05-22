@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencil, faPlus } from "@fortawesome/free-solid-svg-icons";
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';  // Import the calendar CSS
 
 function Eventos() {
   const [events, setEvents] = useState([]);
@@ -10,9 +12,10 @@ function Eventos() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [date, setDate] = useState(new Date());
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   const email = localStorage.getItem("userEmail");
-  //const urlAPI = process.env.REACT_APP_API_URL;
   const urlAPI = "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com"
   const urlEventos = `${urlAPI}/events/owner/${email}`;
 
@@ -23,6 +26,7 @@ function Eventos() {
         if (response.ok) {
           const data = await response.json();
           setEvents(sortEventsByDate(data));
+          filterEventsByDate(new Date());
         } else {
           console.error("Failed to fetch events:", response.statusText);
         }
@@ -47,6 +51,7 @@ function Eventos() {
         setEvents(
           sortEventsByDate(events.filter((event) => event._id !== eventId))
         );
+        filterEventsByDate(date);
         console.log("Event deleted successfully");
       } else {
         console.error("Failed to delete event:", response.statusText);
@@ -74,6 +79,7 @@ function Eventos() {
           )
         );
         setIsEditModalOpen(false);
+        filterEventsByDate(date);
         console.log("Event updated successfully");
       } else {
         console.error("Failed to update event:", response.statusText);
@@ -99,6 +105,7 @@ function Eventos() {
         const createdEvent = await response.json();
         setEvents(sortEventsByDate([...events, createdEvent]));
         setIsCreateModalOpen(false);
+        filterEventsByDate(date);
         console.log("Event created successfully");
       } else {
         console.error("Failed to create event:", response.statusText);
@@ -141,6 +148,29 @@ function Eventos() {
     closeDeleteModal();
   };
 
+  const filterEventsByDate = (date) => {
+    const nextDay = new Date(date);
+    nextDay.setDate(date.getDate() + 1);
+    const filtered = events.filter(event => {
+      const eventDate = new Date(event.date);
+      return (
+        eventDate.getDate() === nextDay.getDate() &&
+        eventDate.getMonth() === nextDay.getMonth() &&
+        eventDate.getFullYear() === nextDay.getFullYear()
+      );
+    });
+    setFilteredEvents(filtered);
+  };
+
+  const handleDateChange = (date) => {
+    setDate(date);
+    filterEventsByDate(date);
+  };
+
+  const showAllEvents = () => {
+    setFilteredEvents(events);
+  };
+
   return (
     <div>
       <Header />
@@ -148,16 +178,29 @@ function Eventos() {
         <button className="button" onClick={openCreateModal}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
+        
+        <button className="button" onClick={showAllEvents}>
+          Show All Events
+        </button>
 
-        <div className="events-list">
-          {events.map((event) => (
-            <Event
-              key={event._id}
-              event={event}
-              onDelete={() => openDeleteModal(event)}
-              onEdit={() => openEditModal(event)}
+        <div className="events-container">
+          <div className="calendar-container">
+            <Calendar
+              onChange={handleDateChange}
+              value={date}
             />
-          ))}
+          </div>
+
+          <div className="events-list">
+            {filteredEvents.map((event) => (
+              <Event
+                key={event._id}
+                event={event}
+                onDelete={() => openDeleteModal(event)}
+                onEdit={() => openEditModal(event)}
+              />
+            ))}
+          </div>
         </div>
 
         {isEditModalOpen && (
