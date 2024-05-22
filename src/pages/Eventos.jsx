@@ -180,7 +180,7 @@ function Eventos() {
         </button>
         
         <button className="button" onClick={showAllEvents}>
-          Show All Events
+          mostrar todos os eventos
         </button>
 
         <div className="events-container">
