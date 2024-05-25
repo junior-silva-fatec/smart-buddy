@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencil, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "react-calendar";
-import 'react-calendar/dist/Calendar.css';  // Import the calendar CSS
+import "react-calendar/dist/Calendar.css"; // Import the calendar CSS
 
 function Eventos() {
   const [events, setEvents] = useState([]);
@@ -16,8 +16,10 @@ function Eventos() {
   const [filteredEvents, setFilteredEvents] = useState([]);
 
   const email = localStorage.getItem("userEmail");
-  const urlAPI = "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com"
+  const urlAPI =
+    "https://web-qx4yu7fnv0m1.up-us-nyc1-k8s-1.apps.run-on-seenode.com";
   const urlEventos = `${urlAPI}/events/owner/${email}`;
+  const urlEditEventos = `${urlAPI}/events`;
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -63,7 +65,7 @@ function Eventos() {
 
   const handleEditEvent = async (updatedEvent) => {
     try {
-      const response = await fetch(`${urlEventos}/${updatedEvent._id}`, {
+      const response = await fetch(`${urlEditEventos}/${updatedEvent._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -151,7 +153,7 @@ function Eventos() {
   const filterEventsByDate = (date) => {
     const nextDay = new Date(date);
     nextDay.setDate(date.getDate() + 1);
-    const filtered = events.filter(event => {
+    const filtered = events.filter((event) => {
       const eventDate = new Date(event.date);
       return (
         eventDate.getDate() === nextDay.getDate() &&
@@ -178,17 +180,14 @@ function Eventos() {
         <button className="button" onClick={openCreateModal}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
-        
+
         <button className="button" onClick={showAllEvents}>
           mostrar todos os eventos
         </button>
 
         <div className="events-container">
           <div className="calendar-container">
-            <Calendar
-              onChange={handleDateChange}
-              value={date}
-            />
+            <Calendar onChange={handleDateChange} value={date} />
           </div>
 
           <div className="events-list">
@@ -256,11 +255,11 @@ const Event = ({ event, onDelete, onEdit }) => {
       </div>
       <div className="colHorario">
         <p>{event.time}</p>
-        <p>{event.duration} hours</p>
+        <p>{event.duration} {event.duration >= 2 ? "horas": "hora"} </p>
       </div>
       <div className="colDescricaoEvento">
         <h2>{event.title}</h2>
-        <p>{event.description}</p>
+        {/* <p>{event.description}</p> */}
       </div>
       <div className="colBotoes">
         <button className="botaoDelete" onClick={onDelete}>
@@ -291,10 +290,10 @@ const EditEventModal = ({ event, onClose, onSave }) => {
     <div className="modal-overlay">
       <div className="modal-overlay">
         <div className="modal-content">
-          <h2>Edit Event</h2>
+          <h2>Editar Evento</h2>
           <form onSubmit={handleSubmit}>
             <label>
-              Title:
+              Título:
               <input
                 type="text"
                 name="title"
@@ -303,7 +302,7 @@ const EditEventModal = ({ event, onClose, onSave }) => {
               />
             </label>
             <label>
-              Description:
+              Descrição:
               <input
                 type="text"
                 name="description"
@@ -312,7 +311,7 @@ const EditEventModal = ({ event, onClose, onSave }) => {
               />
             </label>
             <label>
-              Date:
+              Data:
               <input
                 type="date"
                 name="date"
@@ -321,7 +320,7 @@ const EditEventModal = ({ event, onClose, onSave }) => {
               />
             </label>
             <label>
-              Time:
+              Hora:
               <input
                 type="time"
                 name="time"
@@ -330,7 +329,7 @@ const EditEventModal = ({ event, onClose, onSave }) => {
               />
             </label>
             <label>
-              Duration (hours):
+              Duração (horas):
               <input
                 type="number"
                 name="duration"
@@ -338,10 +337,12 @@ const EditEventModal = ({ event, onClose, onSave }) => {
                 onChange={handleChange}
               />
             </label>
-            <button type="submit">Save</button>
-            <button type="button" onClick={onClose}>
-              Cancel
-            </button>
+            <div className="confirm-cancel-buttons">
+              <button type="submit">Salvar</button>
+              <button type="button" onClick={onClose}>
+                Cancelar
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -371,10 +372,10 @@ const CreateEventModal = ({ onClose, onSave }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Create Event</h2>
+        <h2>Criar Evento</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Title:
+            Título:
             <input
               type="text"
               name="title"
@@ -383,7 +384,7 @@ const CreateEventModal = ({ onClose, onSave }) => {
             />
           </label>
           <label>
-            Description:
+            Descrição:
             <input
               type="text"
               name="description"
@@ -392,7 +393,7 @@ const CreateEventModal = ({ onClose, onSave }) => {
             />
           </label>
           <label>
-            Date:
+            Data:
             <input
               type="date"
               name="date"
@@ -401,7 +402,7 @@ const CreateEventModal = ({ onClose, onSave }) => {
             />
           </label>
           <label>
-            Time:
+            Hora:
             <input
               type="time"
               name="time"
@@ -410,7 +411,7 @@ const CreateEventModal = ({ onClose, onSave }) => {
             />
           </label>
           <label>
-            Duration (hours):
+            Duração (houras):
             <input
               type="number"
               name="duration"
@@ -418,10 +419,12 @@ const CreateEventModal = ({ onClose, onSave }) => {
               onChange={handleChange}
             />
           </label>
-          <button type="submit">Create</button>
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
+          <div className="confirm-cancel-buttons">
+            <button type="submit">Criar</button>
+            <button type="button" onClick={onClose}>
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
