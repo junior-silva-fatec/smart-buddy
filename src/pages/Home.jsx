@@ -61,12 +61,8 @@ function Home() {
     <div className="container">
       <Header />
       <main className="main">
-        <h1>Welcome to Smart Buddy</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-          nec feugiat velit. Nullam gravida tortor magna, eget tincidunt purus
-          tempor eget.
-        </p>
+        <h1>Smart Buddy</h1>
+        <p>Organize seu tempo, transforme sua vida.</p>
         <div className="button-group">
           <button onClick={openModal} className="button">
             Criar Conta
@@ -85,7 +81,7 @@ function Home() {
           <h2>Criar Conta</h2>
           <form onSubmit={handleSubmit}>
             <label>
-              First Name:
+              Nome:
               <input
                 type="text"
                 name="firstName"
@@ -95,7 +91,7 @@ function Home() {
               />
             </label>
             <label>
-              Last Name:
+              Sobrenome:
               <input
                 type="text"
                 name="lastName"
@@ -115,7 +111,7 @@ function Home() {
               />
             </label>
             <label>
-              Password:
+              Senha:
               <input
                 type="password"
                 name="password"
@@ -124,10 +120,12 @@ function Home() {
                 required
               />
             </label>
-            <button type="submit">Criar Conta</button>
-            <button type="button" onClick={closeModal}>
-              Cancelar
-            </button>
+            <div className="confirm-cancel-buttons">
+              <button type="submit">Criar Conta</button>
+              <button type="button" onClick={closeModal}>
+                Cancelar
+              </button>
+            </div>
           </form>
         </div>
       </Modal>

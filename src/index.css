@@ -230,6 +230,7 @@ label {
 }
 
 input[type="email"],
+input[type="text"],
 input[type="password"],
 input[type="date"],
 input[type="time"],
@@ -262,6 +263,11 @@ input[type="number"] {
   background-color: #0056b3;
 }
 
+.confirm-cancel-buttons {
+  display: flex;
+  justify-content:space-evenly;
+  margin-top: 15px;
+}
 .modal-overlay {
   display: flex;
   justify-content: center;
