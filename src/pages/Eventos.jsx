@@ -48,7 +48,7 @@ function Eventos() {
 
   const handleDeleteEvent = async (eventId) => {
     try {
-      const response = await fetch(`${urlEventos}/${eventId}`, {
+      const response = await fetch(`${urlAPI}/events/${eventId}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -67,7 +67,7 @@ function Eventos() {
 
   const handleEditEvent = async (updatedEvent) => {
     try {
-      const response = await fetch(`${urlEditEventos}/${updatedEvent._id}`, {
+      const response = await fetch(`${urlAPI}/events/${updatedEvent._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -165,8 +165,7 @@ function Eventos() {
       const eventMonth = eventDate.getMonth();
       const eventDay = eventDate.getDate() + 1;
   
-      console.log("Event Date:", eventYear, eventMonth, eventDay);
-      console.log("Selected Date:", selectedYear, selectedMonth, selectedDay);
+      
   
       return (
         eventYear === selectedYear &&
@@ -175,7 +174,7 @@ function Eventos() {
       );
     });
   
-    console.log("Filtered Events:", filtered);
+   
     setFilteredEvents(filtered);
   };
   
