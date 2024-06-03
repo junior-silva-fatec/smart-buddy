@@ -27,8 +27,9 @@ function Eventos() {
         const response = await fetch(urlEventos);
         if (response.ok) {
           const data = await response.json();
-          setEvents(sortEventsByDate(data));
-          filterEventsByDate(new Date());
+          const sortedEvents = sortEventsByDate(data);
+          setEvents(sortedEvents);
+          setFilteredEvents(sortedEvents); // Mostrar todos os eventos inicialmente
         } else {
           console.error("Failed to fetch events:", response.statusText);
         }
@@ -36,9 +37,10 @@ function Eventos() {
         console.error("Error:", error);
       }
     };
-
+  
     fetchEvents();
   }, [email, urlEventos]);
+  
 
   const sortEventsByDate = (events) => {
     return events.sort((a, b) => new Date(a.date) - new Date(b.date));
