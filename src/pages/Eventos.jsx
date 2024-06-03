@@ -150,24 +150,44 @@ function Eventos() {
     closeDeleteModal();
   };
 
-  const filterEventsByDate = (date) => {
-    const nextDay = new Date(date);
-    nextDay.setDate(date.getDate() + 1);
+  const filterEventsByDate = (selectedDate) => {
     const filtered = events.filter((event) => {
       const eventDate = new Date(event.date);
+  
+      // Extrair componentes de data
+      const selectedYear = selectedDate.getFullYear();
+      const selectedMonth = selectedDate.getMonth();
+      const selectedDay = selectedDate.getDate();
+  
+      const eventYear = eventDate.getFullYear();
+      const eventMonth = eventDate.getMonth();
+      const eventDay = eventDate.getDate() + 1;
+  
+      console.log("Event Date:", eventYear, eventMonth, eventDay);
+      console.log("Selected Date:", selectedYear, selectedMonth, selectedDay);
+  
       return (
-        eventDate.getDate() === nextDay.getDate() &&
-        eventDate.getMonth() === nextDay.getMonth() &&
-        eventDate.getFullYear() === nextDay.getFullYear()
+        eventYear === selectedYear &&
+        eventMonth === selectedMonth &&
+        eventDay === selectedDay
       );
     });
+  
+    console.log("Filtered Events:", filtered);
     setFilteredEvents(filtered);
   };
+  
+  
+  
+  
+  
+  
 
   const handleDateChange = (date) => {
     setDate(date);
     filterEventsByDate(date);
   };
+  
 
   const showAllEvents = () => {
     setFilteredEvents(events);
@@ -187,7 +207,11 @@ function Eventos() {
 
         <div className="events-container">
           <div className="calendar-container">
-            <Calendar onChange={handleDateChange} value={date} />
+            <Calendar
+              onChange={handleDateChange}
+              value={date}
+              locale="en-US" // Set the locale to ensure the week starts on Sunday
+            />
           </div>
 
           <div className="events-list">
@@ -411,7 +435,7 @@ const CreateEventModal = ({ onClose, onSave }) => {
             />
           </label>
           <label>
-            Duração (houras):
+            Duração (horas):
             <input
               type="number"
               name="duration"
